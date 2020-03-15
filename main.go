@@ -30,23 +30,20 @@ func processFile(fileName string) {
 	fmt.Println("FileName: ", fileName)
 	fmt.Println("Generated struct: ")
 	var finalStruct string
-	val, ok := value.(map[string]interface{})
-	if ok {
+
+	switch val := value.(type) {
+	case map[string]interface{}:
 		finalStruct += "type auto struct { "
 		parseJSONObjects(val, 2, &finalStruct)
-		finalStruct += "}"
-		fmt.Println(finalStruct)
-		fmt.Println("====================")
-		return
-	}
-
-	v, ok := value.([]interface{})
-	if ok {
+	case []interface{}:
 		first = true
 		finalStruct += "type auto []struct { "
-		_, _ = parseJSONArrays(v, 1, 2, &finalStruct)
-		finalStruct += "}"
-		fmt.Println(finalStruct)
-		fmt.Println("====================")
+		_, _ = parseJSONArrays(val, 1, 2, &finalStruct)
+	default:
+		panic("Invalid JSON provided.")
 	}
+
+	finalStruct += "}"
+	fmt.Println(finalStruct)
+	fmt.Println("====================")
 }
