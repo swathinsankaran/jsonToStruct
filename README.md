@@ -4,7 +4,8 @@ A simple application to convert JSON data to go struct.
 
 Example:
 
-A sample JSON
+A sample JSON input to the application
+
 ```sh
 {
   "name": "Barksalot",
@@ -14,7 +15,8 @@ A sample JSON
 }
 ```
 
-Converted to:
+gets converted to the following struct.
+
 ```sh
 type auto struct { 
   Name          string	`json:"name"`
