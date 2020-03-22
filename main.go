@@ -1,6 +1,7 @@
 package main
 
 import (
+	"container/list"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -21,6 +22,8 @@ func main() {
 
 // processFile function reads the content of the file and calls the parser functions.
 func processFile(fileName string) {
+
+	l := list.New()
 	var value interface{}
 	contents := readContents(fileName)
 	err := json.Unmarshal(contents, &value)
@@ -29,21 +32,26 @@ func processFile(fileName string) {
 	}
 	fmt.Println("FileName: ", fileName)
 	fmt.Println("Generated struct: ")
-	var finalStruct string
 
 	switch val := value.(type) {
 	case map[string]interface{}:
-		finalStruct += "type auto struct { "
-		parseJSONObjects(val, 2, &finalStruct)
+		l.PushFront("type auto struct { ")
+		parseJSONObjects(l, val, 2)
 	case []interface{}:
 		first = true
-		finalStruct += "type auto []struct { "
-		_, _ = parseJSONArrays(val, 1, 2, &finalStruct)
+		l.PushFront("type auto []struct { ")
+		_, _ = parseJSONArrays(l, val, 1, 2)
 	default:
 		panic("Invalid JSON provided.")
 	}
 
-	finalStruct += "}"
-	fmt.Println(finalStruct)
+	l.PushBack("}")
+	print(l)
 	fmt.Println("====================")
+}
+
+func print(l *list.List) {
+	for e := l.Front(); e != nil; e = e.Next() {
+		fmt.Println(e.Value)
+	}
 }
