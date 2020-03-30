@@ -36,9 +36,9 @@ cd jsonToStruct
 make exe
 ```
 
-### Dependencies
+### Dependencies (using go modules)
 
-  - https://github.com/iancoleman/strcase
+  - https://github.com/iancoleman/strcase (latest)
 
 ### prerequisites
   
