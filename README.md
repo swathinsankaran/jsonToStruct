@@ -25,6 +25,10 @@ type auto struct {
   Photo         string	`json:"photo"`
 }
 ```
+### Application in action
+
+![json-to-struct](https://user-images.githubusercontent.com/6292363/78546973-ecc4ec00-781b-11ea-9a74-63060dc9c726.JPG)
+
 ### Usage
 ```sh
 ./jsonToStruct <file1.json> <file2.json> ..
