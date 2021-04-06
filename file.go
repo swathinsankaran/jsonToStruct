@@ -2,20 +2,26 @@ package main
 
 import (
 	"io/ioutil"
-	"log"
 	"os"
 )
 
-// readContents reads the file and returns the content of the file.
-func readContents(fileName string) []byte {
-	fileReader, err := os.Open(fileName)
-	if err != nil {
-		log.Fatal(err)
-	}
+type file struct {
+	filePath string
+	contents []byte
+}
+
+func newFile(filePath string) *file {
+	f := &file{}
+	f.filePath = filePath
+	f.Read()
+	return f
+}
+
+func (f *file) Read() {
+	fileReader, err := os.Open(f.filePath)
+	checkErr(err)
 	defer fileReader.Close()
-	content, err := ioutil.ReadAll(fileReader)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return content
+
+	f.contents, err = ioutil.ReadAll(fileReader)
+	checkErr(err)
 }

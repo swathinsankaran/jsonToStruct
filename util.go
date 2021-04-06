@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 // getType checks whether the data types are the same. If same it returns
 // data type concatenated with its dimention(2D/3D). If the data type is not same
@@ -33,8 +36,14 @@ func printTabs(count int) string {
 	var i int
 	var result string
 	for i < count {
-		result += " "
+		result += "\t"
 		i++
 	}
 	return result
+}
+
+func checkErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }
