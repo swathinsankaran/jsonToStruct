@@ -29,6 +29,9 @@ type auto struct {
 
 ![json-to-struct](https://user-images.githubusercontent.com/6292363/78546973-ecc4ec00-781b-11ea-9a74-63060dc9c726.JPG)
 
+![App in action #2](https://user-images.githubusercontent.com/6292363/113766900-a0b4cc00-973b-11eb-93c5-b9ccea1368e2.png)
+
+
 ### Usage
 ```sh
 ./jsonToStruct <file1.json> <file2.json> ..
